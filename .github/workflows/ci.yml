@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: ${{ contains(matrix.toolchain, 'nightly') }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         toolchain:
           - stable
@@ -93,7 +93,7 @@ jobs:
     if: needs.skip-check.outputs.should_skip != 'true'
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         os:
           - windows-latest
