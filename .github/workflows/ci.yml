@@ -1,3 +1,10 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 3 optimizations:
+# - [HIGH] Add cargo dependency cache to "rust" job
+# - [MEDIUM] Add concurrency group to "ci.yml"
+# - [MEDIUM] 13 jobs clone the repo — consider artifact sharing
+# Estimated savings: ~11 min/run
+#
 name: CI
 
 on:
@@ -11,6 +18,10 @@ on:
     - cron: '0 0 * * 0' # at midnight of each sunday
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 
